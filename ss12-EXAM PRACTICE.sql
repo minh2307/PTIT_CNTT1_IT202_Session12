@@ -154,8 +154,10 @@ begin
 end
 // delimiter ;
 
-call 
+set @p_NewScore = 0;
 
+call UpdateScore_IT_DB('S00001', @p_NewScore);
 
+select * from UpdateScore_IT_DB;
 
 
