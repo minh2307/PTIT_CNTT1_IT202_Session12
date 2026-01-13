@@ -113,7 +113,7 @@ where TotalStudents = (select MAX(TotalStudents)
 -- Câu 5: a)Viết Stored Procedure GetTopScoreStudent
 
 delimiter //
-create procedure GetTopScoreStudent(IN p_CourseID int)
+create procedure GetTopScoreStudent(IN p_CourseID varchar(100))
 begin 
 	select * from student s
 	join Enrollment e on e.studentID = s.studentID
@@ -142,7 +142,7 @@ join department d on s.DeptID = d.DeptID;
 
 -- b)Viết Stored Procedure UpdateScore_IT_DB
 delimiter //
-create procedure UpdateScore_IT_DB(IN p_StudentID int, INOUT p_NewScore float)
+create procedure UpdateScore_IT_DB(IN p_StudentID varchar(100), INOUT p_NewScore float)
 begin
 	if p_NewScore > 10 then
 		set p_NewScore = 10;
