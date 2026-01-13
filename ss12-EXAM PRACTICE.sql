@@ -115,12 +115,13 @@ where TotalStudents = (select MAX(TotalStudents)
 delimiter //
 create procedure GetTopScoreStudent(IN p_CourseID int)
 begin 
-select * from student s
-join Enrollment e on e.studentID = s.studentID
-where p_CourseID = e.CourseID and 
-	e.score = (select MAX(score)
-      from Enrollment 
-      where CourseID =p_CourseID);
+	select * from student s
+	join Enrollment e on e.studentID = s.studentID
+	where p_CourseID = e.CourseID and 
+		e.score = (select MAX(score)
+		  from Enrollment 
+		  where CourseID =p_CourseID);
+
 end
 // delimiter ;
 
@@ -146,7 +147,15 @@ begin
 	if p_NewScore > 10 then
 		set p_NewScore = 10;
 	end if;
-    alter table Enrollment
-    modify 
+    
+    UPDATE View_IT_Enrollment_DB
+    SET Score = p_NewScore
+    WHERE StudentID = p_StudentID;
 end
 // delimiter ;
+
+call 
+
+
+
+
